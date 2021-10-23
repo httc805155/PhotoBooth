@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QtMultimedia>
 #include <QCamera>
+#include <QQuickItem>
 
 int main(int argc, char *argv[])
 {
@@ -19,6 +20,17 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+    QString configDataDirString = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).at(1);
+    qDebug() << configDataDirString;
+
+    if(!QDir(configDataDirString).exists())
+    {
+        QDir().mkdir(configDataDirString);
+    }
+
+    QObject *object = engine.rootObjects()[0];
+    object->setProperty("defaultPath", configDataDirString);
 
     return app.exec();
 }

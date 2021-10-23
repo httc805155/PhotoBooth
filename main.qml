@@ -8,6 +8,7 @@ Window {
     height: 480
     visible: true
     title: qsTr("Hello World")
+    property string defaultPath
 
     Rectangle
     {
@@ -15,58 +16,48 @@ Window {
         anchors.fill: parent
         color: "gray"
 
-        //MediaDevices
-        //{
-            //id: previewArea
-            //color: "blue"
-            //width: 500
-            //height: 500
-            //Camera
-            //{
-            //}
-
-            //anchors.fill: parent
-            //anchors.bottomMargin: 80
-        //}
         MediaDevices {
             id: mediaDevices
+        }
+
+        CaptureSession {
+            videoOutput: output
+            camera: Camera{ active: true; cameraDevice: mediaDevices.defaultVideoInput}
         }
 
         VideoOutput
         {
             id: output
             anchors.fill: parent
-        }
-
-        CaptureSession {
-            camera: camera
-            videoOutput: output
-        }
-
-        Camera
-        {
-            id: camera
-            active: true
-            cameraDevice: mediaDevices.defaultVideoInput
+            anchors.bottomMargin: 30
         }
 
         RoundButton
         {
+            id: snapshot
             radius: 30
             width: 60
             height: 60
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 10
+            property int count: 0
+            property string savingPath
 
 
-            onClicked: console.log(camera.cameraDevice.description)
+            onClicked: shot()
 
             function shot()
             {
-                //console.debug("Clicked")
-                //onlybutton.height = 50
+                console.log("Shot")
+                output.grabToImage(function(image) {
+                    console.log("Called...", arguments)
+                    savingPath = defaultPath + "/screen" + count + ".png"
+                    image.saveToFile(defaultPath + "/screen" + count + ".png"); // save happens here
+                    count++
+                });
             }
+
         }
     }
 }

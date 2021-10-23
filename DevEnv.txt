@@ -1,0 +1,3 @@
+OS: Windows10 64bit
+QT: v6.2
+MSVC: 2019 64bit
