@@ -57,7 +57,33 @@ Window {
                     count++
                 });
             }
+        }
 
+        Gallery
+        {
+            visible: false
+        }
+
+        Button
+        {
+            text:"gallery"
+            width: 60
+            height: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+        }
+
+        Button
+        {
+            text:"camera"
+            width: 60
+            height: 30
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+            anchors.left: parent.left
+            anchors.leftMargin: 100
         }
     }
 }

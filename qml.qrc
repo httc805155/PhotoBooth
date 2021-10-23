@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>CameraView.qml</file>
+        <file>Gallery.qml</file>
     </qresource>
 </RCC>
