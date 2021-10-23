@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include <QtMultimedia>
+#include <QCamera>
 
 int main(int argc, char *argv[])
 {
